@@ -51,6 +51,10 @@ module Spree
         subclasses.each(&:generator)
       end
 
+      def self.generate(sub_klass)
+        sub_klass.send(:generator)
+      end
+
       def populate(contacts_data, users_data)
         contacts_data.each do |contact_data|
           contact = Spree::Marketing::Contact.load(contact_data.slice('email_address', 'id', 'unique_email_id')

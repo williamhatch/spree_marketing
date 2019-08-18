@@ -7,15 +7,20 @@ module Spree
         AVAILABLE_REPORTS = [:purchases_by].freeze
 
         def user_ids
-          # FIXME: There is a case where guest user has an incomplete order and we
-          # might have his email if he has processed address state successfully
-          # right now we are leaving that case.
-          Spree::Order.incomplete
-                      .of_registered_users
-                      .where.not(item_count: 0)
-                      .distinct
-                      .pluck(:user_id)
         end
+
+        private
+
+          def users_data
+            Spree::Order.incomplete
+                        .where('spree_orders.updated_at >= ?', Time.now.in_time_zone - 24.hours)
+                        .where('spree_orders.user_id IS NULL')
+                        .where('spree_orders.email IS NOT NULL')
+                        .where.not(item_count: 0)
+                        .distinct
+                        .pluck(:email, :guest_token)
+                        .to_h
+          end
       end
     end
   end

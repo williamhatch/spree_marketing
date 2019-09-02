@@ -13,7 +13,8 @@ module Spree
 
           def users_data
             Spree::Order.incomplete
-                        .where('spree_orders.updated_at >= ?', Time.now.in_time_zone - 24.hours)
+                        .where('spree_orders.updated_at >= ?', Time.now.in_time_zone - 48.hours)
+                        .where('spree_orders.updated_at <= ?', Time.now.in_time_zone - 22.hours)
                         .where('spree_orders.user_id IS NULL')
                         .where('spree_orders.email IS NOT NULL')
                         .where.not(item_count: 0)

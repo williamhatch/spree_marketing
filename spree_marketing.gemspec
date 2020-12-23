@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_runtime_dependency 'spree_core', '>= 3.1.0', '< 4.0'
+  s.add_runtime_dependency 'spree_core'
   s.add_dependency 'gibbon'
   s.add_dependency 'whenever'
 

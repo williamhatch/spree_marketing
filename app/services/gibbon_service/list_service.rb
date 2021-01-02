@@ -5,7 +5,7 @@ module GibbonService
     MEMBER_STATUS = {unsubscribe: 'unsubscribed', subscribe: 'subscribed'}.freeze
     DEFAULT_MEMBER_RETRIEVAL_PARAMS = {params: {status: MEMBER_STATUS[:subscribe]}}.freeze
     LIST_ATTRIBUTES = %i[permission_reminder email_type_option campaign_defaults contact].freeze
-    DEFAULT_LIST_GENERATION_PARAMS = SpreeMarketing::CONFIG[Rails.env].slice(*LIST_ATTRIBUTES)
+    DEFAULT_LIST_GENERATION_PARAMS = {} #SpreeMarketing::CONFIG[Rails.env].slice(*LIST_ATTRIBUTES)
 
     def initialize(list_uid = nil)
       @list_uid = list_uid
